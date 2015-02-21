@@ -2,24 +2,61 @@
 <html>
   <head>
     <script src="jquery.js"></script>
+    <script src="moment.js"></script>
     <script src="data_generator.js"></script>
+    <link rel="stylesheet" type="text/css" href="stylesheet.css">
   </head>
+
   <body>
+    <h1 class="topbar">
+      <div align='left'><img src="mavslogo.png" height="42" width="42"> Mavter </div><div class ="tagline">The Dallas Basketball twitter</div>
+      <button class="getNewTwits" align='center'>Get new twits!</button>
+      </h1>
+      <div id="feed" align='center'></div>
     <script>
 
       $(document).ready(function(){
-        var $body = $('body');
-        $body.html('');
-
+        var $feed = $('#feed');
         var index = streams.home.length - 1;
+        var lastIndex = index;
         while(index >= 0){
           var tweet = streams.home[index];
-          var $tweet = $('<div></div>');
-          $tweet.text('@' + tweet.user + ': ' + tweet.message);
-          $tweet.appendTo($body);
+          var $tweet = $('<div class=\"tweet\"id=' + tweet.user + '></div>');
+          $tweet.text('@' + tweet.user + ': ' + tweet.message + ' ' + tweet.created_at);
+          $tweet.appendTo($feed);
           index -= 1;
         }
-
+        $(".getNewTwits").click(function(){
+          $("div.tweet").remove();
+          var index = streams.home.length - 1;
+          /*var currentIndex = streams.home.length - 1;
+          lastIndex = lastIndex+1;
+          for (i = lastIndex; i <= currentIndex; i++){
+            var tweet = streams.home[i];
+            var $tweet = $('<div class=\"tweet\"id=' + tweet.user + '></div>');
+            $tweet.text('@' + tweet.user + ': ' + tweet.message + ' ' + tweet.created_at);
+            $tweet.appendTo($body);
+            lastIndex++;*/
+          while(index >= 0){
+            var tweet = streams.home[index];
+            var $tweet = $('<div class=\"tweet\"id=' + tweet.user + '></div>');
+            $tweet.text('@' + tweet.user + ': ' + tweet.message + ' ' + tweet.created_at);
+            $tweet.appendTo($feed);
+            index -= 1;
+          };
+        });
+        $(document).on("click", "div.tweet", function(){
+          var tweeterName = $(this).attr('id');
+          var tweeter = streams.users[tweeterName];
+          //emptys the current tweets to allow display of the only the tweets from that username
+          $("div").remove();
+          for (var i in tweeter){
+            var tweet = tweeter[i];
+            var $tweet = $('<div class=\"tweet\"id=' + tweet.user + '></div>');
+            $tweet.text('@' + tweet.user + ': ' + tweet.message + ' ' + tweet.created_at);
+            $tweet.appendTo($feed);
+          };
+        });
       });
 
     </script>
