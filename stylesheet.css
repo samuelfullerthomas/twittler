@@ -1,0 +1,43 @@
+h1 {
+	color: blue;
+	text-align: center;
+	font-family: helvetica;
+}
+body{
+	background-color:silver;
+}
+.logo{
+	vertical-align: left;
+}
+.topbar{
+	background-color:silver;
+    margin:20px;
+    border-style: solid;
+    border-radius: 3px;
+    border-color:black;
+    padding:20px;
+    vertical-align: left;
+}
+.tweet{
+	border-style:solid;
+	border-radius: 3px;
+	border-color:black;
+	width:300px;
+   	max-width:300px;
+   	display:block;
+	background-color:white;
+	margin:2px;
+	padding:20px;
+	text-align: center;
+	font-size: 18px;
+	color:black;
+}
+.tagline{
+	font-size:12px;
+	font-family:helvetica;
+	text-align: left;
+	
+}
+.getNewTwits{
+	margin-top: 0px;
+}
